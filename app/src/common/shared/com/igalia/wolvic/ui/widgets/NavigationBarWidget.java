@@ -96,6 +96,7 @@ public class NavigationBarWidget extends UIWidget implements WSession.Navigation
     private static final int BOOKMARK_ADDED_NOTIFICATION_ID = 2;
     private static final int POPUP_NOTIFICATION_ID = 3;
     private static final int WEB_APP_ADDED_NOTIFICATION_ID = 4;
+    private static final int STENA_NOTIFICATION_ID = 5; // Stena: Diazoma
 
     public interface NavigationListener {
         void onBack();
@@ -1221,6 +1222,24 @@ public class NavigationBarWidget extends UIWidget implements WSession.Navigation
         showSaveWebAppDialog();
     }
 
+    // Stena: Diazoma: the wall button of the address bar, "Open as wall" and the per-site switch of the menu.
+    @Override
+    public void onStenaWallClicked() {
+        stenaOpen();
+    }
+
+    private void stenaOpen() {
+        com.igalia.wolvic.stena.StenaWall.open(getContext(), mAttachedWindow.getSession(),
+                message -> showNotification(STENA_NOTIFICATION_ID, NotificationManager.Notification.BOTTOM, message));
+    }
+
+    private void stenaSite(boolean off) {
+        com.igalia.wolvic.stena.StenaWall.setSiteOff(getContext(), mAttachedWindow.getSession().getCurrentUri(), off);
+        mAttachedWindow.stenaHint();
+        showNotification(STENA_NOTIFICATION_ID, NotificationManager.Notification.BOTTOM,
+                off ? R.string.stena_site_turned_off : R.string.stena_site_turned_on);
+    }
+
     // VoiceSearch Delegate
 
     @Override
@@ -1400,6 +1419,19 @@ public class NavigationBarWidget extends UIWidget implements WSession.Navigation
                 hideMenu();
 
                 showSaveWebAppDialog();
+            }
+
+            // Stena: Diazoma
+            @Override
+            public void onOpenAsWall() {
+                hideMenu();
+                stenaOpen();
+            }
+
+            @Override
+            public void onStenaSite(boolean off) {
+                hideMenu();
+                stenaSite(off);
             }
 
             @Override

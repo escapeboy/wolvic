@@ -284,6 +284,28 @@ public class SessionImpl implements WSession, DownloadManagerBridge.Delegate {
         return mTextInput;
     }
 
+    // Stena: see WSession#executeScript.
+    @AnyThread
+    @Override
+    public void executeScript(@NonNull String script, int worldId, @NonNull java.util.function.Consumer<String> callback) {
+        if (mTab == null) {
+            callback.accept("null");
+            return;
+        }
+        mTab.executeScript(script, worldId, callback::accept);
+    }
+
+    // Stena: see WSession#allowCrossOriginReads.
+    @AnyThread
+    @Override
+    public void allowCrossOriginReads(@NonNull String origin, @NonNull String[] hosts, @NonNull Runnable done) {
+        if (mTab == null) {
+            done.run();
+            return;
+        }
+        mTab.allowCrossOriginReads(origin, hosts, done);
+    }
+
     @AnyThread
     @Override
     public void pageZoomIn() {

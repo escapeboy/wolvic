@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Stena: replaces Wolvic's terms (Igalia's text) with Diazoma Browser's. The texts are in stena_strings.xml. -->
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
@@ -27,22 +28,23 @@
         <TextView
             android:id="@+id/termsServiceTitle"
             style="@style/policyTitle"
-            android:text="@string/terms_service_title" />
+            android:text="@string/stena_terms_title" />
 
         <TextView
             android:id="@+id/termsServiceSection1"
             style="@style/policyBody"
-            android:text="@string/terms_service_section_1" />
+            android:autoLink="web"
+            android:text="@string/stena_terms_section_1" />
 
         <TextView
             android:id="@+id/termsServiceSubtitle2"
             style="@style/policySubtitle"
-            android:text="@string/terms_service_subtitle_2" />
+            android:text="@string/stena_terms_subtitle_2" />
 
         <TextView
             android:id="@+id/termsServiceSection2"
             style="@style/policyBody"
-            android:text="@string/terms_service_section_2" />
+            android:text="@string/stena_terms_section_2" />
     </LinearLayout>
 
 </layout>

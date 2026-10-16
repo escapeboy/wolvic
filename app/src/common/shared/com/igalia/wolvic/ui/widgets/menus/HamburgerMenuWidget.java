@@ -49,6 +49,8 @@ public class HamburgerMenuWidget extends UIWidget implements
         void onSwitchMode();
         void onAddons();
         void onSaveWebApp();
+        void onOpenAsWall(); // Stena: Diazoma
+        void onStenaSite(boolean off); // Stena: Diazoma
         void onPassthrough();
         boolean isPassthroughEnabled();
         void onPageZoomIn();
@@ -255,6 +257,38 @@ public class HamburgerMenuWidget extends UIWidget implements
                         })
                         .withTitle(getContext().getString(R.string.hamburger_menu_save_web_app))
                         .withIcon(R.drawable.ic_web_app_registration)
+                        .build());
+            }
+
+            // Stena: Diazoma's "Open as wall" and its per-site switch, only where the engine can run its scripts (Chromium)
+            // and on web pages.
+            String stenaUrl = activeSession.getCurrentUri();
+            if (BuildConfig.FLAVOR_backend.equals("chromium") && (URLUtil.isHttpsUrl(stenaUrl) || URLUtil.isHttpUrl(stenaUrl))
+                    && !mWidgetManager.getFocusedWindow().isNativeContentVisible()) {
+                boolean stenaOff = com.igalia.wolvic.stena.StenaWall.isSiteOff(getContext(), stenaUrl);
+                if (!stenaOff) {
+                    mItems.add(new HamburgerMenuAdapter.MenuItem.Builder(
+                            HamburgerMenuAdapter.MenuItem.TYPE_DEFAULT,
+                            (menuItem) -> {
+                                if (mDelegate != null) {
+                                    mDelegate.onOpenAsWall();
+                                }
+                                return null;
+                            })
+                            .withTitle(getContext().getString(R.string.stena_menu_open_wall))
+                            .withIcon(R.drawable.ic_stena_wall)
+                            .build());
+                }
+                mItems.add(new HamburgerMenuAdapter.MenuItem.Builder(
+                        HamburgerMenuAdapter.MenuItem.TYPE_DEFAULT,
+                        (menuItem) -> {
+                            if (mDelegate != null) {
+                                mDelegate.onStenaSite(!stenaOff);
+                            }
+                            return null;
+                        })
+                        .withTitle(getContext().getString(stenaOff ? R.string.stena_menu_site_on : R.string.stena_menu_site_off))
+                        .withIcon(R.drawable.ic_stena_wall)
                         .build());
             }
 

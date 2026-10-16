@@ -226,6 +226,14 @@ public class SettingsWidget extends UIDialog implements SettingsView.Delegate {
             onDismiss();
         });
 
+        // Stena: Diazoma's settings
+        mBinding.stenaButton.setOnClickListener(view -> {
+            if (mAudio != null) {
+                mAudio.playSound(AudioEngine.Sound.CLICK);
+            }
+            showView(SettingsView.SettingViewType.STENA);
+        });
+
         mBinding.helpButton.setOnClickListener(view -> {
             if (mAudio != null) {
                 mAudio.playSound(AudioEngine.Sound.CLICK);
@@ -487,6 +495,9 @@ public class SettingsWidget extends UIDialog implements SettingsView.Delegate {
                 break;
             case CONTROLLER:
                 showView(new ControllerOptionsView(getContext(), mWidgetManager));
+                break;
+            case STENA: // Stena: Diazoma
+                showView(new StenaOptionsView(getContext(), mWidgetManager));
                 break;
             case TRACKING_EXCEPTION:
                 showView(new TrackingPermissionsOptionsView(getContext(), mWidgetManager));

@@ -250,6 +250,9 @@ public class SettingsStore {
      * Any consumer listening to the SettingsViewModel will get notified of the properties updates.
      */
     private void updateRemoteContent(String endpoint, int prefsKey, Consumer<String> onContentAvailable) {
+        if (endpoint == null || endpoint.isEmpty()) {
+            return; // Stena: switched off in Diazoma Browser
+        }
         ((VRBrowserApplication) mContext.getApplicationContext()).getExecutors().backgroundThread().post(() -> {
             Request request = new Request(
                     endpoint,

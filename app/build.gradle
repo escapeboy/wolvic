@@ -102,13 +102,13 @@ def isWebKitAvailable = {
 
 // Version names for Gecko and Chromium releases.
 def GECKO_VERSION_NAME = '2.0'
-def CHROMIUM_VERSION_NAME = '1.4'
+def CHROMIUM_VERSION_NAME = '0.1.0' // Stena: Diazoma Browser, on Wolvic 1.4
 
 android {
     namespace = 'com.igalia.wolvic'
     compileSdk = 36
     defaultConfig {
-        applicationId = "com.igalia.wolvic"
+        applicationId = "app.diazoma.browser" // Stena: Diazoma Browser
         minSdk = 26
         targetSdk = 34
         versionCode = generatedVersionCode
@@ -125,14 +125,14 @@ android {
         buildConfigField "Float", "DEFAULT_WINDOW_DISTANCE", "0.0f"
         buildConfigField "Boolean", "ENABLE_PAGE_ZOOM", "false"
         buildConfigField "Boolean", "USE_SOUNDPOOL", "true"
-        buildConfigField 'String', 'ANNOUNCEMENTS_ENDPOINT', '"https://igalia.github.io/wolvic/announcements.json"'
+        buildConfigField 'String', 'ANNOUNCEMENTS_ENDPOINT', '""'
         buildConfigField 'String', 'EXPERIENCES_ENDPOINT', '"https://igalia.github.io/wolvic/experiences.json"'
         buildConfigField 'String', 'HEYVR_ENDPOINT', '"https://api.heyvr.io/v1/public/global/feed/featured?limit=50"'
         buildConfigField 'String', 'OTEL_ENDPOINT', '""'
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        resValue 'string', 'app_name', 'Wolvic'
-        resValue 'string', 'HOMEPAGE_URL', "https://wolvic.com/start"
+        resValue 'string', 'app_name', 'Diazoma Browser'
+        resValue 'string', 'HOMEPAGE_URL', "https://diazoma.app/app/"
         externalNativeBuild {
             cmake {
                 cppFlags "-fexceptions -frtti -Werror" +
@@ -158,7 +158,7 @@ android {
     }
 
     base {
-        archivesName = "Wolvic"
+        archivesName = "DiazomaBrowser"
     }
 
     compileOptions {
@@ -334,7 +334,7 @@ android {
         noapi {
             dimension = "platform"
             applicationIdSuffix = ".noapi"
-            resValue "string", "app_name", "Wolvic NoAPI"
+            resValue "string", "app_name", "Diazoma Browser NoAPI"
             externalNativeBuild {
                 cmake {
                     cppFlags " -DNOAPI"
@@ -389,7 +389,7 @@ android {
 
         chromium {
             dimension = "backend"
-            resValue "string", "app_name", "Wolvic Chromium"
+            resValue "string", "app_name", "Diazoma Browser"
             externalNativeBuild {
                 cmake {
                     cppFlags " -DCHROMIUM"
@@ -397,7 +397,7 @@ android {
                 }
             }
             buildConfigField "Boolean", "ENABLE_PAGE_ZOOM", "true"
-            buildConfigField 'String', 'PROPS_ENDPOINT', '"https://igalia.github.io/wolvic/props-chromium.json"'
+            buildConfigField 'String', 'PROPS_ENDPOINT', '""'
         }
 
         webkit {
@@ -704,6 +704,7 @@ dependencies {
     // Vosk
     implementation libs.vosk
     implementation libs.okhttp
+    implementation 'org.bouncycastle:bcprov-jdk18on:1.80' // Stena: Ed25519 for the signed Diazoma lists
     implementation libs.zip4j
     implementation libs.apache.commonsmath3
 

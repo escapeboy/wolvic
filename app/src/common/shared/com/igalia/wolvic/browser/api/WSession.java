@@ -2827,6 +2827,24 @@ public interface WSession {
     WTextInput getTextInput();
 
 
+    /**
+     * Stena: runs a script in the main frame. worldId 0 is the page's own world, 1..10 are isolated worlds. The callback gets
+     * the completion value as JSON ("null" if none or unsupported); promises are not awaited.
+     */
+    @AnyThread
+    default void executeScript(@NonNull String script, int worldId, @NonNull java.util.function.Consumer<String> callback) {
+        callback.accept("null");
+    }
+
+    /**
+     * Stena: lets pages of `origin` read https resources of `hosts` without CORS headers, as an extension's host
+     * permissions do, in this session's browser context. `done` runs once that is in effect.
+     */
+    @AnyThread
+    default void allowCrossOriginReads(@NonNull String origin, @NonNull String[] hosts, @NonNull Runnable done) {
+        done.run();
+    }
+
     @AnyThread
     void pageZoomIn();
 

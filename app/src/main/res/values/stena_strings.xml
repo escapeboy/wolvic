@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Stena: every text Diazoma adds to the browser. English only for now. A translation is a copy of this file in
+  values-<lang>/stena_strings.xml with the same names; stena_values.xml holds what must not be translated.
+-->
+<resources>
+    <!-- Hamburger menu item that opens the current page as a Diazoma wall. -->
+    <string name="stena_menu_open_wall">Open as wall</string>
+    <!-- Hamburger menu items that switch Diazoma off or on for the current site. -->
+    <string name="stena_menu_site_off">Turn off Diazoma here</string>
+    <string name="stena_menu_site_on">Turn on Diazoma here</string>
+    <!-- Tooltip of the wall button in the address bar. -->
+    <string name="stena_wall_button_tooltip">Open as wall</string>
+    <!-- Label of the button that closes the wall drawn over a page. -->
+    <string name="stena_close_wall">Close wall</string>
+
+    <!-- Notifications after "Open as wall". -->
+    <string name="stena_not_a_page">Diazoma works on web pages.</string>
+    <string name="stena_site_off">Diazoma is turned off for this site.</string>
+    <string name="stena_site_wall_unchecked">This site has its own wall, but its address could not be checked, so Diazoma does not open it.</string>
+    <string name="stena_denied">This site asks that no wall is built for it.</string>
+    <string name="stena_manifest_invalid">This site publishes a wall manifest that Diazoma cannot use.</string>
+    <string name="stena_manifest_unreadable">This site did not answer for its wall manifest. Try again later.</string>
+    <string name="stena_none">No wall for this page yet.</string>
+    <string name="stena_failed">Diazoma could not read this page.</string>
+    <string name="stena_site_turned_off">Diazoma is now off for this site.</string>
+    <string name="stena_site_turned_on">Diazoma is now on for this site.</string>
+
+    <!-- Settings: the button on the main settings screen and the Diazoma screen. -->
+    <string name="stena_settings_button">Diazoma</string>
+    <string name="stena_settings_title">Diazoma</string>
+    <string name="stena_settings_auto_detect">Show the wall button when a page has a wall</string>
+    <string name="stena_settings_input_profile">Controls of the wall</string>
+    <string name="stena_input_profile_auto">Automatic</string>
+    <string name="stena_input_profile_meta_quest">Meta Quest</string>
+    <string name="stena_input_profile_desktop">Mouse and keyboard</string>
+    <string name="stena_settings_core_list">Core recipe list</string>
+    <!-- %1$d is the list revision, %2$d the number of recipes in it. -->
+    <string name="stena_settings_core_list_loaded">Core recipe list: revision %1$d, %2$d recipes</string>
+    <string name="stena_settings_core_list_not_loaded">Core recipe list: not loaded yet</string>
+    <!-- %1$s is a relative time such as "5 minutes ago". -->
+    <string name="stena_settings_last_checked">Last checked %1$s</string>
+    <!-- %1$s is a relative time, %2$s the problems found (technical, not translated). -->
+    <string name="stena_settings_last_check_failed">Last check %1$s failed: %2$s</string>
+    <string name="stena_settings_check_now">Check now</string>
+    <string name="stena_settings_checking">Checking…</string>
+    <!-- %1$s is the list address, %2$d its revision, %3$d the number of recipes. -->
+    <string name="stena_settings_custom_list_loaded">%1$s: revision %2$d, %3$d recipes</string>
+    <string name="stena_settings_custom_list_not_loaded">%1$s: not loaded yet</string>
+    <string name="stena_settings_remove">Remove</string>
+    <string name="stena_settings_add_list">Add a signed list</string>
+    <string name="stena_settings_add_list_hint">https://</string>
+    <string name="stena_settings_list_refused">The list was refused</string>
+    <string name="stena_settings_no_off_sites">No sites are switched off. Use the menu on a page to turn Diazoma off for that site.</string>
+    <!-- %1$s is a site origin such as https://example.com. -->
+    <string name="stena_settings_off_site">Off for %1$s</string>
+    <string name="stena_settings_turn_on">Turn on</string>
+    <string name="stena_settings_reset">Reset the Diazoma settings</string>
+
+    <!-- Settings > Privacy > Terms of service. Draft: to be checked before a public release. -->
+    <string name="stena_terms_title">Diazoma Browser</string>
+    <string name="stena_terms_section_1">Diazoma Browser is free and open source software. It is a modified version of Wolvic, made by Igalia and the Wolvic contributors, and it is distributed under the Mozilla Public License 2.0. You may use, copy and share it under that license. The source code of this version is at https://github.com/escapeboy/wolvic.
+        \n\nDiazoma Browser is not made or endorsed by Igalia. The Wolvic name and logo belong to Igalia, and this license grants no rights to them.</string>
+    <string name="stena_terms_subtitle_2">Web services</string>
+    <string name="stena_terms_section_2">The browser uses a few web services: the recipe lists and the walls on diazoma.app, and the list of VR experiences on the new tab page. They are provided as they are, without any warranty, and they may change or stop.</string>
+
+    <!-- Settings > Privacy > Privacy policy. Draft: to be checked before a public release. -->
+    <string name="stena_privacy_title">Privacy</string>
+    <string name="stena_privacy_subtitle_1">What the browser sends</string>
+    <string name="stena_privacy_section_1">Diazoma Browser sends no usage statistics and no crash reports. Finding a wall for a page happens inside the browser, and the page address is not sent anywhere. When a recipe opens its wall on diazoma.app, only the name of the recipe goes there.</string>
+    <string name="stena_privacy_subtitle_2">Connections the browser makes</string>
+    <string name="stena_privacy_section_2">• diazoma.app, at most once a day, to update the signed recipe lists, and to any signed list you add yourself.
+        \n• diazoma.app when you open a wall from a recipe, and the museums and archives the recipe reads.
+        \n• igalia.github.io and api.heyvr.io, for the list of VR experiences on the new tab page.
+        \n• The sites you visit, as in any browser.</string>
+    <string name="stena_privacy_subtitle_3">More</string>
+    <string name="stena_privacy_section_3">The privacy policy of Diazoma is at https://diazoma.app/privacy/. Questions go to privacy@diazoma.app.</string>
+
+    <!-- Reasons a custom list is refused. -->
+    <string name="stena_list_https_only">The address must be https.</string>
+    <string name="stena_list_core_always_on">The core list is always on.</string>
+    <string name="stena_list_untrusted">This list is not signed by a key Diazoma trusts.</string>
+</resources>

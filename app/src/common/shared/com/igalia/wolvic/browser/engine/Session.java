@@ -1066,6 +1066,24 @@ public class Session implements WContentBlocking.Delegate, WSession.NavigationDe
         mState.mParentId = parentSession.getId();
     }
 
+    // Stena: see WSession#executeScript.
+    public void executeScript(@NonNull String script, int worldId, @NonNull java.util.function.Consumer<String> callback) {
+        if (mState.mSession != null) {
+            mState.mSession.executeScript(script, worldId, callback);
+        } else {
+            callback.accept("null");
+        }
+    }
+
+    // Stena: see WSession#allowCrossOriginReads.
+    public void allowCrossOriginReads(@NonNull String origin, @NonNull String[] hosts, @NonNull Runnable done) {
+        if (mState.mSession != null) {
+            mState.mSession.allowCrossOriginReads(origin, hosts, done);
+        } else {
+            done.run();
+        }
+    }
+
     public void pageZoomIn() {
         if (mState.mSession != null) {
             mState.mSession.pageZoomIn();

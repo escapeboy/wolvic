@@ -223,6 +223,15 @@
                             app:honeycombButtonTextSize="@dimen/settings_main_button_text_width"
                             app:visibleGone="@{BuildConfig.FLAVOR_backend != &quot;chromium&quot;}"/>
 
+                        <!-- Stena: Diazoma's settings -->
+                        <com.igalia.wolvic.ui.views.HoneycombButton
+                            android:id="@+id/stenaButton"
+                            style="?attr/honeycombButtonStyle"
+                            app:honeycombButtonIcon="@drawable/ic_stena_wall"
+                            app:honeycombButtonText="@string/stena_settings_button"
+                            app:honeycombButtonTextSize="@dimen/settings_main_button_text_width"
+                            app:visibleGone="@{BuildConfig.FLAVOR_backend == &quot;chromium&quot;}"/>
+
                         <com.igalia.wolvic.ui.views.HoneycombButton
                             android:id="@+id/helpButton"
                             style="?attr/honeycombButtonStyle"

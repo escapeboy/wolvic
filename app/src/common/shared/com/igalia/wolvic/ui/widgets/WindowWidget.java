@@ -2131,6 +2131,15 @@ public class WindowWidget extends UIWidget implements SessionChangeListener,
         }
 
         mViewModel.setIsLoading(false);
+        stenaHint(); // Stena: Diazoma
+    }
+
+    // Stena: the wall button of the address bar, as the extension's badge: after a load, or when the site is switched.
+    public void stenaHint() {
+        mViewModel.setIsStenaWall(false);
+        if (mSession != null && com.igalia.wolvic.BuildConfig.FLAVOR_backend.equals("chromium")) {
+            com.igalia.wolvic.stena.StenaWall.hint(getContext(), mSession, mViewModel::setIsStenaWall);
+        }
     }
 
     public void captureImage() {
@@ -2151,6 +2160,7 @@ public class WindowWidget extends UIWidget implements SessionChangeListener,
         mViewModel.setIsMediaAvailable(false);
         mViewModel.setIsMediaPlaying(false);
         mViewModel.setIsWebApp(false);
+        mViewModel.setIsStenaWall(false); // Stena: Diazoma
         mViewModel.setIsFindInPage(false);
 
         Windows.ContentType contentType = UrlUtils.getContentType(url);

@@ -41,7 +41,8 @@ public abstract class SettingsView extends FrameLayout {
         SEARCH_ENGINE_EDIT,
         CUSTOM_SEARCH_ENGINES,
         TERMS_OF_SERVICE,
-        PRIVACY_POLICY
+        PRIVACY_POLICY,
+        STENA // Stena: Diazoma
     }
 
     protected Delegate mDelegate;

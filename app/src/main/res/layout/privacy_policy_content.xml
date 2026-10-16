@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Stena: replaces Wolvic's privacy policy (Igalia's text) with Diazoma Browser's. The texts are in stena_strings.xml. -->
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <LinearLayout
@@ -27,37 +28,38 @@
         <TextView
             android:id="@+id/privacyPolicyTitle"
             style="@style/policyTitle"
-            android:text="@string/privacy_policy_title" />
+            android:text="@string/stena_privacy_title" />
 
         <TextView
             android:id="@+id/privacyPolicySubtitle1"
             style="@style/policySubtitle"
-            android:text="@string/privacy_policy_subtitle_1" />
+            android:text="@string/stena_privacy_subtitle_1" />
 
         <TextView
             android:id="@+id/privacyPolicySection1"
             style="@style/policyBody"
-            android:text="@string/privacy_policy_section_1" />
+            android:text="@string/stena_privacy_section_1" />
 
         <TextView
             android:id="@+id/privacyPolicySubtitle2"
             style="@style/policySubtitle"
-            android:text="@string/privacy_policy_subtitle_2" />
+            android:text="@string/stena_privacy_subtitle_2" />
 
         <TextView
             android:id="@+id/privacyPolicySection2"
             style="@style/policyBody"
-            android:text="@string/privacy_policy_section_2" />
+            android:text="@string/stena_privacy_section_2" />
 
         <TextView
             android:id="@+id/privacyPolicySubtitle3"
             style="@style/policySubtitle"
-            android:text="@string/privacy_policy_subtitle_3" />
+            android:text="@string/stena_privacy_subtitle_3" />
 
         <TextView
             android:id="@+id/privacyPolicySection3"
             style="@style/policyBody"
-            android:text="@string/privacy_policy_section_3" />
+            android:autoLink="web|email"
+            android:text="@string/stena_privacy_section_3" />
     </LinearLayout>
 
 </layout>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Stena: values that are not translated. The labels live in stena_strings.xml. -->
+<resources>
+    <string-array name="stena_input_profiles" translatable="false">
+        <item>@string/stena_input_profile_auto</item>
+        <item>@string/stena_input_profile_meta_quest</item>
+        <item>@string/stena_input_profile_desktop</item>
+    </string-array>
+
+    <!-- The `inputProfile` values of the extension's settings (apps/extension/src/lib/storage.ts). -->
+    <string-array name="stena_input_profile_values" translatable="false">
+        <item>auto</item>
+        <item>meta-quest</item>
+        <item>desktop</item>
+    </string-array>
+</resources>

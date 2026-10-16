@@ -120,6 +120,7 @@ public class NavigationURLBar extends FrameLayout {
         void onTrackingButtonClicked();
         void onDrmButtonClicked();
         void onWebAppButtonClicked();
+        default void onStenaWallClicked() {} // Stena: Diazoma
         boolean onHandleExternalRequest(@NonNull String uri);
     }
 
@@ -262,6 +263,16 @@ public class NavigationURLBar extends FrameLayout {
 
         // Web app
         mBinding.webAppButton.setOnClickListener(mWebAppButtonClick);
+
+        // Stena: Diazoma's wall button
+        mBinding.stenaWallButton.setOnClickListener(view -> {
+            if (mAudio != null) {
+                mAudio.playSound(AudioEngine.Sound.CLICK);
+            }
+            if (mDelegate != null) {
+                mDelegate.onStenaWallClicked();
+            }
+        });
 
         mFindInPage = new FindInPageInteractor(
                 mBinding.findInPage,

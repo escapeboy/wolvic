@@ -247,6 +247,18 @@
                     app:privateMode="@{viewmodel.isPrivateSession}"
                     app:visibleGone="@{viewmodel.isWebApp &amp;&amp; !(viewmodel.isNativeContentVisible || viewmodel.isUrlEmpty) &amp;&amp; !viewmodel.isFocused}" />
 
+                <!-- Stena: Diazoma's wall button, shown when the page matches a recipe or has its own wall. -->
+                <com.igalia.wolvic.ui.views.UIButton
+                    android:id="@+id/stenaWallButton"
+                    style="@style/urlBarIconTheme"
+                    android:layout_width="@dimen/url_bar_item_width"
+                    android:background="@{viewmodel.isPrivateSession ? @drawable/url_button_private : @drawable/url_button}"
+                    android:src="@drawable/ic_stena_wall"
+                    android:tint="@color/fog"
+                    android:tooltipText="@string/stena_wall_button_tooltip"
+                    app:privateMode="@{viewmodel.isPrivateSession}"
+                    app:visibleGone="@{viewmodel.isStenaWall &amp;&amp; !(viewmodel.isNativeContentVisible || viewmodel.isUrlEmpty) &amp;&amp; !viewmodel.isFocused}" />
+
                 <com.igalia.wolvic.ui.views.UIButton
                     android:id="@+id/bookmarkButton"
                     style="@style/urlBarIconThemeEnd"

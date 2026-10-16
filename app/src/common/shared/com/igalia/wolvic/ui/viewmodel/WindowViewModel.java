@@ -59,6 +59,7 @@ public class WindowViewModel extends AndroidViewModel {
     private MutableLiveData<ObservableBoolean> isMicrophoneEnabled;
     private MutableLiveData<ObservableBoolean> isBookmarked;
     private MutableLiveData<ObservableBoolean> isWebApp;
+    private MutableLiveData<ObservableBoolean> isStenaWall; // Stena: Diazoma
     private MutableLiveData<ObservableBoolean> isFocused;
     private MutableLiveData<ObservableBoolean> isUrlEmpty;
     private MutableLiveData<ObservableBoolean> isFindInPage;
@@ -149,6 +150,7 @@ public class WindowViewModel extends AndroidViewModel {
         isMicrophoneEnabled = new MutableLiveData<>(new ObservableBoolean(true));
         isBookmarked = new MutableLiveData<>(new ObservableBoolean(false));
         isWebApp = new MutableLiveData<>(new ObservableBoolean(false));
+        isStenaWall = new MutableLiveData<>(new ObservableBoolean(false));
         isFocused = new MutableLiveData<>(new ObservableBoolean(false));
         isUrlEmpty = new MutableLiveData<>(new ObservableBoolean(true));
         isFindInPage = new MutableLiveData<>(new ObservableBoolean(false));
@@ -653,6 +655,16 @@ public class WindowViewModel extends AndroidViewModel {
 
     public void setIsWebApp(boolean isWebApp) {
         this.isWebApp.postValue(new ObservableBoolean(isWebApp));
+    }
+
+    // Stena: Diazoma's wall button in the address bar.
+    @NonNull
+    public MutableLiveData<ObservableBoolean> getIsStenaWall() {
+        return isStenaWall;
+    }
+
+    public void setIsStenaWall(boolean isStenaWall) {
+        this.isStenaWall.postValue(new ObservableBoolean(isStenaWall));
     }
 
     @NonNull

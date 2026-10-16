@@ -996,7 +996,7 @@
 
     <!-- This string describes the situation when the coarse location permission has been granted,
          but the fine location permission has not. -->
-    <string name="security_options_permission_fine_location_warning">Wolvic can only get your approximate location. This can be changed in the system settings.</string>
+    <string name="security_options_permission_fine_location_warning">Diazoma Browser can only get your approximate location. This can be changed in the system settings.</string>
 
     <!-- This string labels the button that displays or enables the application to post system-wide
          notifications. -->
@@ -2610,9 +2610,9 @@ the Select` button. When clicked it bookmarks all the previously selected tabs -
 
     <!-- These strings are displayed in the privacy dialog on first launch. -->
     <string name="privacy_dialog_title">Privacy</string>
-    <string name="privacy_dialog_message">Your privacy is important to us. In order to run the browser, please accept our terms of service and privacy policy. Thanks for using Wolvic! </string>
+    <string name="privacy_dialog_message">Your privacy is important to us. In order to run the browser, please accept our terms of service and privacy policy. Thanks for using Diazoma Browser!</string>
     <string name="privacy_dialog_agree">Agree</string>
-    <string name="privacy_dialog_disagree">Close Wolvic</string>
+    <string name="privacy_dialog_disagree">Close Diazoma Browser</string>
 
     <!-- These strings are the content of the Terms of Service. -->
     <string name="terms_service_title">Terms of Service</string>
