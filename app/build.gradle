@@ -411,10 +411,9 @@ android {
 
         metaStore {
             dimension = "store"
-            applicationIdSuffix = ".metastore"
-            externalNativeBuild {
+            externalNativeBuild { // Stena: no ".metastore" suffix: one package for every Diazoma Browser build
                 cmake {
-                    cppFlags "-DSTORE_BUILD", "-DMETA_APP_ID=5917120145021341"
+                    cppFlags "-DSTORE_BUILD", "-DMETA_APP_ID=1125377003288190"
                 }
             }
         }
