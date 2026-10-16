@@ -191,7 +191,8 @@ public final class StenaWall {
                     return;
                 }
                 // The pictures come from hosts that send no CORS headers. The extension reads them with its host
-                // permissions; here the same hosts are opened to diazoma.app's pages before the wall loads.
+                // permissions; here those picture CDNs (hosts.json, no logins there) are opened to diazoma.app's pages
+                // before the wall loads. Never a host with user sessions: a page could read it with the user's cookies.
                 String[] hosts = privilegedHosts(context);
                 Log.w(LOGTAG, "Opening " + hosts.length + " picture hosts to the wall");
                 String target = wall.appendQueryParameter("via", "browser").build().toString();
@@ -213,7 +214,7 @@ public final class StenaWall {
         }
     }
 
-    /** The hosts of hosts.json (the extension's optional host permissions), all of them `https://<host>/*`. */
+    /** The hosts of hosts.json (the extension's CORE_MEDIA_HOSTS), all of them `https://<host>/*`. */
     private static String[] privilegedHosts(Context context) throws IOException, JSONException {
         JSONArray patterns = new JSONArray(asset(context, "stena/hosts.json"));
         List<String> hosts = new ArrayList<>();

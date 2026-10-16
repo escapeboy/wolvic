@@ -1,25 +1,4 @@
 [
- "https://api.artic.edu/*",
- "https://www.artic.edu/*",
- "https://openaccess-api.clevelandart.org/*",
- "https://clevelandart.org/*",
- "https://www.clevelandart.org/*",
  "https://openaccess-cdn.clevelandart.org/*",
- "https://commons.wikimedia.org/*",
- "https://upload.wikimedia.org/*",
- "https://images-api.nasa.gov/*",
- "https://images.nasa.gov/*",
- "https://images-assets.nasa.gov/*",
- "https://api.inaturalist.org/*",
- "https://www.inaturalist.org/*",
- "https://inaturalist-open-data.s3.amazonaws.com/*",
- "https://api.wellcomecollection.org/*",
- "https://wellcomecollection.org/*",
- "https://iiif.wellcomecollection.org/*",
- "https://search.artsmia.org/*",
- "https://collections.artsmia.org/*",
- "https://1.api.artsmia.org/*",
- "https://api.smk.dk/*",
- "https://open.smk.dk/*",
- "https://iip-thumb.smk.dk/*"
+ "https://images-assets.nasa.gov/*"
 ]
