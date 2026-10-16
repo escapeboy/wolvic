@@ -56,6 +56,13 @@
                     app:values="@array/stena_input_profile_values" />
 
                 <com.igalia.wolvic.ui.views.settings.ButtonSetting
+                    android:id="@+id/intro_again"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:buttonText="@string/stena_settings_intro_button"
+                    app:description="@string/stena_settings_intro" />
+
+                <com.igalia.wolvic.ui.views.settings.ButtonSetting
                     android:id="@+id/lists_status"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

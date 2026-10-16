@@ -11,6 +11,7 @@ import com.igalia.wolvic.AppExecutors;
 import com.igalia.wolvic.R;
 import com.igalia.wolvic.VRBrowserApplication;
 import com.igalia.wolvic.databinding.OptionsStenaBinding;
+import com.igalia.wolvic.stena.StenaIntro;
 import com.igalia.wolvic.stena.StenaLists;
 import com.igalia.wolvic.stena.StenaSettings;
 import com.igalia.wolvic.ui.views.settings.ButtonSetting;
@@ -50,6 +51,8 @@ class StenaOptionsView extends SettingsView {
         mBinding.inputProfileRadio.setChecked(mBinding.inputProfileRadio.getIdForValue(mSettings.getInputProfile()), false);
         mBinding.inputProfileRadio.setOnCheckedChangeListener((group, checkedId, apply) ->
                 mSettings.setInputProfile((String) mBinding.inputProfileRadio.getValueForId(checkedId)));
+
+        mBinding.introAgain.setOnClickListener(v -> StenaIntro.show(getContext()));
 
         mBinding.listsStatus.setOnClickListener(v -> {
             mBinding.listsStatus.setDescription(getContext().getString(R.string.stena_settings_checking));

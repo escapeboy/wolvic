@@ -22,6 +22,10 @@ public final class StenaSettings {
     private static final String INPUT_PROFILE = "inputProfile";
     private static final String OFF_SITES = "offSites";
     private static final String CUSTOM_LISTS = "customLists";
+    private static final String INTRO_SHOWN = "introShown";
+    private static final String HINT_COUNT = "hintCount";
+    /** How many times the wall button gets its hint bubble. */
+    public static final int HINT_LIMIT = 3;
 
     private final SharedPreferences mPrefs;
 
@@ -49,6 +53,24 @@ public final class StenaSettings {
 
     public void setInputProfile(@NonNull String profile) {
         mPrefs.edit().putString(INPUT_PROFILE, profile).apply();
+    }
+
+    /** The three-step intro that follows the terms and privacy dialogs on the first start. */
+    public boolean isIntroShown() {
+        return mPrefs.getBoolean(INTRO_SHOWN, false);
+    }
+
+    public void setIntroShown(boolean shown) {
+        mPrefs.edit().putBoolean(INTRO_SHOWN, shown).apply();
+    }
+
+    /** How many times the hint bubble of the wall button has been shown. */
+    public int getHintCount() {
+        return mPrefs.getInt(HINT_COUNT, 0);
+    }
+
+    public void setHintCount(int count) {
+        mPrefs.edit().putInt(HINT_COUNT, count).apply();
     }
 
     /** Origins the user switched Diazoma off for. */

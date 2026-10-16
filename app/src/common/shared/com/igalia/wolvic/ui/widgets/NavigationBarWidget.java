@@ -97,6 +97,34 @@ public class NavigationBarWidget extends UIWidget implements WSession.Navigation
     private static final int POPUP_NOTIFICATION_ID = 3;
     private static final int WEB_APP_ADDED_NOTIFICATION_ID = 4;
     private static final int STENA_NOTIFICATION_ID = 5; // Stena: Diazoma
+    // Stena: Diazoma: a bubble next to the wall button the first STENA_HINT_LIMIT times it appears.
+    private String mStenaHintedUrl;
+    private final androidx.lifecycle.Observer<androidx.databinding.ObservableBoolean> mIsStenaWallObserver = visible -> {
+        // "this." because the fields used here are declared further down.
+        if (!visible.get() || this.mViewModel == null || getSession() == null) {
+            return;
+        }
+        com.igalia.wolvic.stena.StenaSettings settings = com.igalia.wolvic.stena.StenaSettings.get(getContext());
+        String url = getSession().getCurrentUri();
+        if (settings.getHintCount() >= com.igalia.wolvic.stena.StenaSettings.HINT_LIMIT || url.equals(mStenaHintedUrl)) {
+            return;
+        }
+        mStenaHintedUrl = url;
+        postDelayed(() -> {
+            UIButton button = this.mBinding.navigationBarNavigation.urlBar.getStenaWallButton();
+            if (this.mViewModel == null || button.getVisibility() != VISIBLE || !this.mViewModel.getIsActiveWindow().getValue().get()) {
+                return;
+            }
+            // Read again: two pages within the delay must not make a fourth bubble.
+            int shown = settings.getHintCount();
+            if (shown >= com.igalia.wolvic.stena.StenaSettings.HINT_LIMIT) {
+                return;
+            }
+            settings.setHintCount(shown + 1);
+            android.util.Log.w("StenaWall", "Wall button hint " + (shown + 1));
+            showNotification(STENA_NOTIFICATION_ID, button, NotificationManager.Notification.TOP, R.string.stena_wall_hint);
+        }, 600);
+    };
 
     public interface NavigationListener {
         void onBack();
@@ -597,6 +625,7 @@ public class NavigationBarWidget extends UIWidget implements WSession.Navigation
             mViewModel.getIsLoading().removeObserver(mIsLoadingObserver);
             mViewModel.getIsActiveWindow().removeObserver(mIsActiveWindowObserver);
             mViewModel.getIsPopUpBlocked().removeObserver(mIsPopUpBlockedListener);
+            mViewModel.getIsStenaWall().removeObserver(mIsStenaWallObserver); // Stena: Diazoma
             mViewModel = null;
         }
     }
@@ -621,6 +650,7 @@ public class NavigationBarWidget extends UIWidget implements WSession.Navigation
         mViewModel.getIsLoading().observe((VRBrowserActivity)getContext(), mIsLoadingObserver);
         mViewModel.getIsActiveWindow().observeForever(mIsActiveWindowObserver);
         mViewModel.getIsPopUpBlocked().observeForever(mIsPopUpBlockedListener);
+        mViewModel.getIsStenaWall().observeForever(mIsStenaWallObserver); // Stena: Diazoma
         mBinding.navigationBarNavigation.urlBar.attachToWindow(mAttachedWindow);
 
         mTrackingDelegate.addListener(mTrackingListener);
@@ -1432,6 +1462,15 @@ public class NavigationBarWidget extends UIWidget implements WSession.Navigation
             public void onStenaSite(boolean off) {
                 hideMenu();
                 stenaSite(off);
+            }
+
+            @Override
+            public void onStenaSuggest() { // Stena: Diazoma
+                hideMenu();
+                String url = com.igalia.wolvic.stena.StenaWall.suggestUrl(mAttachedWindow.getSession().getCurrentUri());
+                if (url != null) {
+                    mWidgetManager.openNewTabForeground(url);
+                }
             }
 
             @Override

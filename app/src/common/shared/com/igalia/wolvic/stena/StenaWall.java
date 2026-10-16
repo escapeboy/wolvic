@@ -48,6 +48,9 @@ public final class StenaWall {
     private static final long POLL_MS = 150;
     private static final long TIMEOUT_MS = 20_000;
     private static final Map<String, String> sAssets = new HashMap<>();
+    // The CORS allow list is per browser context, and private tabs have their own: one call for each, once per process.
+    private static boolean sHostsOpen;
+    private static boolean sHostsOpenPrivate;
 
     public interface Notifier {
         void show(@StringRes int message);
@@ -86,6 +89,33 @@ public final class StenaWall {
     }
 
     /**
+     * When a page of diazoma.app's start page or walls starts loading: opens the picture hosts to diazoma.app's pages
+     * (see {@link #act}) so the first pictures of a wall already get through. The hosts are CDNs without logins.
+     */
+    @UiThread
+    public static void pageStarted(@NonNull Context context, @NonNull Session session, @NonNull String uri) {
+        if (!uri.startsWith(APP_ORIGIN + "/app/")) {
+            return;
+        }
+        boolean isPrivate = session.isPrivateMode();
+        if (isPrivate ? sHostsOpenPrivate : sHostsOpen) {
+            return;
+        }
+        try {
+            String[] hosts = privilegedHosts(context);
+            if (isPrivate) {
+                sHostsOpenPrivate = true;
+            } else {
+                sHostsOpen = true;
+            }
+            Log.w(LOGTAG, "Opening " + hosts.length + " picture hosts for the start page");
+            session.allowCrossOriginReads(APP_ORIGIN, hosts, () -> {});
+        } catch (IOException | JSONException e) {
+            Log.e(LOGTAG, "Cannot open the picture hosts: " + e.getClass().getSimpleName());
+        }
+    }
+
+    /**
      * After a page load: true when a recipe matches the address or the page has its own wall, so the address bar shows
      * the wall button. Nothing leaves the browser; manifests and page items are only looked for on a click.
      */
@@ -119,6 +149,12 @@ public final class StenaWall {
                 });
             }));
         });
+    }
+
+    /** The suggest form of diazoma.app with the origin of the page filled in, and nothing else. Null when it is not a web page. */
+    public static String suggestUrl(String pageUrl) {
+        String origin = StenaSettings.originOf(pageUrl);
+        return origin == null ? null : Uri.parse(APP_ORIGIN + "/app/suggest.html").buildUpon().appendQueryParameter("origin", origin).build().toString();
     }
 
     /** The per-site switch of the extension popup. */

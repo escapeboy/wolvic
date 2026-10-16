@@ -375,6 +375,11 @@ public class NavigationURLBar extends FrameLayout {
         return mBinding.urlEditText.getNonAutocompleteText();
     }
 
+    // Stena: Diazoma
+    public UIButton getStenaWallButton() {
+        return mBinding.stenaWallButton;
+    }
+
     public UIButton getPopUpButton() {
         return mBinding.popup;
     }

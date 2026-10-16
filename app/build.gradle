@@ -102,7 +102,7 @@ def isWebKitAvailable = {
 
 // Version names for Gecko and Chromium releases.
 def GECKO_VERSION_NAME = '2.0'
-def CHROMIUM_VERSION_NAME = '0.1.0' // Stena: Diazoma Browser, on Wolvic 1.4
+def CHROMIUM_VERSION_NAME = '0.1.1' // Stena: Diazoma Browser, on Wolvic 1.4
 
 android {
     namespace = 'com.igalia.wolvic'
@@ -132,7 +132,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         resValue 'string', 'app_name', 'Diazoma Browser'
-        resValue 'string', 'HOMEPAGE_URL', "https://diazoma.app/app/"
+        resValue 'string', 'HOMEPAGE_URL', "https://diazoma.app/app/?via=browser"
         externalNativeBuild {
             cmake {
                 cppFlags "-fexceptions -frtti -Werror" +

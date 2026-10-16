@@ -51,6 +51,7 @@ public class HamburgerMenuWidget extends UIWidget implements
         void onSaveWebApp();
         void onOpenAsWall(); // Stena: Diazoma
         void onStenaSite(boolean off); // Stena: Diazoma
+        void onStenaSuggest(); // Stena: Diazoma
         void onPassthrough();
         boolean isPassthroughEnabled();
         void onPageZoomIn();
@@ -288,6 +289,22 @@ public class HamburgerMenuWidget extends UIWidget implements
                             return null;
                         })
                         .withTitle(getContext().getString(stenaOff ? R.string.stena_menu_site_on : R.string.stena_menu_site_off))
+                        .withIcon(R.drawable.ic_stena_wall)
+                        .build());
+            }
+
+            // Stena: Diazoma's "Suggest this site", on web pages where the engine is Chromium.
+            if (BuildConfig.FLAVOR_backend.equals("chromium") && (URLUtil.isHttpsUrl(stenaUrl) || URLUtil.isHttpUrl(stenaUrl))
+                    && !mWidgetManager.getFocusedWindow().isNativeContentVisible()) {
+                mItems.add(new HamburgerMenuAdapter.MenuItem.Builder(
+                        HamburgerMenuAdapter.MenuItem.TYPE_DEFAULT,
+                        (menuItem) -> {
+                            if (mDelegate != null) {
+                                mDelegate.onStenaSuggest();
+                            }
+                            return null;
+                        })
+                        .withTitle(getContext().getString(R.string.stena_menu_suggest))
                         .withIcon(R.drawable.ic_stena_wall)
                         .build());
             }

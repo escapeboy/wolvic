@@ -9,6 +9,24 @@
     <!-- Hamburger menu items that switch Diazoma off or on for the current site. -->
     <string name="stena_menu_site_off">Turn off Diazoma here</string>
     <string name="stena_menu_site_on">Turn on Diazoma here</string>
+    <!-- Hamburger menu item that opens the form for suggesting the current site as a source. -->
+    <string name="stena_menu_suggest">Suggest this site to Diazoma</string>
+    <!-- Bubble next to the wall button the first times it appears. -->
+    <string name="stena_wall_hint">This page can be a wall. Press to open it.</string>
+
+    <!-- First-run intro, three steps. -->
+    <string name="stena_intro_title_1">Open pictures as a wall</string>
+    <string name="stena_intro_body_1">When a page has pictures that can become a wall, a wall button appears in the address bar. Press it to open the page as a wall around you.</string>
+    <string name="stena_intro_title_2">Any page, from the menu</string>
+    <string name="stena_intro_body_2">Not sure about a page? Open the menu and choose Open as wall. If there is no wall for it yet, you can suggest the site from the same menu.</string>
+    <string name="stena_intro_title_3">Settings</string>
+    <string name="stena_intro_body_3">Settings, then Diazoma, has the controls of the wall and the lists of sites. You can see this intro again from there.</string>
+    <string name="stena_intro_next">Next</string>
+    <string name="stena_intro_skip">Skip</string>
+    <string name="stena_intro_done">Done</string>
+    <string name="stena_settings_intro">Introduction</string>
+    <string name="stena_settings_intro_button">Show intro again</string>
+
     <!-- Tooltip of the wall button in the address bar. -->
     <string name="stena_wall_button_tooltip">Open as wall</string>
     <!-- Label of the button that closes the wall drawn over a page. -->

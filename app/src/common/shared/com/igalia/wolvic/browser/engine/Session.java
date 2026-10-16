@@ -751,7 +751,7 @@ public class Session implements WContentBlocking.Delegate, WSession.NavigationDe
             homepage = UrlUtils.urlForText(mContext, homepage, wSession.getUrlUtilsVisitor());
         }
         if (homepage.equals(mContext.getString(R.string.HOMEPAGE_URL)) && mState.mRegion != null) {
-            homepage = homepage + "?region=" + mState.mRegion;
+            homepage = homepage + (homepage.contains("?") ? "&" : "?") + "region=" + mState.mRegion; // Stena: Diazoma
         }
         return homepage;
     }
@@ -1281,6 +1281,9 @@ public class Session implements WContentBlocking.Delegate, WSession.NavigationDe
             return;
         }
         Log.d(LOGTAG, "Session onPageStart");
+        if (com.igalia.wolvic.BuildConfig.FLAVOR_backend.equals("chromium")) {
+            com.igalia.wolvic.stena.StenaWall.pageStarted(mContext, this, aUri); // Stena: Diazoma
+        }
         mState.mIsLoading = true;
         mPageLoadStartMs = SystemClock.uptimeMillis();
 
