@@ -1140,6 +1140,10 @@ public class Session implements WContentBlocking.Delegate, WSession.NavigationDe
             mState.mWebAppManifest = null;
         }
 
+        if (com.igalia.wolvic.stena.StenaLists.get(mContext).isStaleHome(aUri)) { // Stena: Diazoma
+            aSession.loadUri("javascript:window.location.replace('" + getHomeUri() + "');");
+            return;
+        }
         // The homepage finishes loading after the region has been updated
         if (mState.mRegion != null && aUri.equalsIgnoreCase(SettingsStore.getInstance(mContext).getHomepage())) {
             aSession.loadUri("javascript:window.location.replace('" + getHomeUri() + "');");

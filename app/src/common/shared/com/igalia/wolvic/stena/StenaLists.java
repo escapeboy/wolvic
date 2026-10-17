@@ -109,12 +109,31 @@ public final class StenaLists {
      * settings only, never the network, and takes no lock: it runs on the UI thread while an update may hold one.
      */
     public @NonNull String appendListIds(@NonNull String home) {
+        return home + (home.contains("?") ? "&" : "?") + "lists=" + listIds();
+    }
+
+    private String listIds() {
         List<String> ids = new ArrayList<>();
         for (String u : mSettings.getCustomLists()) {
             java.util.regex.Matcher m = DIAZOMA_LIST.matcher(u);
             if (acceptableUrl(u) && m.matches() && !"core".equals(m.group(1)) && !ids.contains(m.group(1))) ids.add(m.group(1));
         }
-        return home + (home.contains("?") ? "&" : "?") + "lists=" + String.join(",", ids);
+        return String.join(",", ids);
+    }
+
+    /**
+     * True when a loaded page is Diazoma's start page (the default home page is set) but says other lists than the
+     * settings: a tab restored from an older session, or a list added or removed since the page was opened. The
+     * caller then loads the home address again. Never true for the address {@link #appendListIds} made, so no loop.
+     */
+    public boolean isStaleHome(@NonNull String uri) {
+        String home = mContext.getString(R.string.HOMEPAGE_URL);
+        if (!home.equals(com.igalia.wolvic.browser.SettingsStore.getInstance(mContext).getHomepage())) return false;
+        Uri u = Uri.parse(uri);
+        Uri h = Uri.parse(home);
+        if (!"https".equals(u.getScheme()) || !java.util.Objects.equals(u.getHost(), h.getHost())
+                || !java.util.Objects.equals(u.getPath(), h.getPath()) || !"browser".equals(u.getQueryParameter("via"))) return false;
+        return !listIds().equals(u.getQueryParameter("lists"));
     }
 
     /** {@link #appendListIds} for Diazoma's default home page; any other home page is returned as it is. */
