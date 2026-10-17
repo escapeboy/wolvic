@@ -101,7 +101,8 @@ public final class StenaLists {
         mSettings = StenaSettings.get(context);
     }
 
-    private static final Pattern DIAZOMA_LIST = Pattern.compile("^https://diazoma\\.app/v1/lists/([a-z]+)$");
+    /** A list on diazoma.app, with or without a slash at the end (a list added as `…/lists/adult/` is still adult). */
+    private static final Pattern DIAZOMA_LIST = Pattern.compile("^https://diazoma\\.app/v1/lists/([a-z]+)/?$");
 
     /**
      * The home page address with the ids of the subscribed lists other than core (only lists diazoma.app serves):
