@@ -220,8 +220,12 @@ public final class StenaWall {
                 overlay(context, session, new JSONObject().put("mode", "dom"));
                 return;
             case "recipe": {
-                // Only the recipe id goes to diazoma.app: the page address stays in the browser.
+                // Only the recipe id (and the id of a list other than core) goes to diazoma.app: the page address
+                // stays in the browser. A recipe that is not in the catalog, such as one of the adult list, is read
+                // from its list.
                 Uri.Builder wall = Uri.parse(APP_WALL).buildUpon().appendQueryParameter("recipe", d.getString("id"));
+                String list = d.optString("list", "core");
+                if (!"core".equals(list) && list.matches("[a-z]+")) wall.appendQueryParameter("list", list);
                 if (!d.getBoolean("privileged")) {
                     session.loadUri(wall.build().toString());
                     return;

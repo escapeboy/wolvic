@@ -746,12 +746,16 @@ public class Session implements WContentBlocking.Delegate, WSession.NavigationDe
 
     public String getHomeUri() {
         String homepage = SettingsStore.getInstance(mContext).getHomepage();
+        boolean diazomaHome = homepage.equals(mContext.getString(R.string.HOMEPAGE_URL)); // Stena: Diazoma
         WSession wSession = getWSession();
         if (wSession != null) {
             homepage = UrlUtils.urlForText(mContext, homepage, wSession.getUrlUtilsVisitor());
         }
         if (homepage.equals(mContext.getString(R.string.HOMEPAGE_URL)) && mState.mRegion != null) {
             homepage = homepage + (homepage.contains("?") ? "&" : "?") + "region=" + mState.mRegion; // Stena: Diazoma
+        }
+        if (diazomaHome) {
+            homepage = com.igalia.wolvic.stena.StenaLists.get(mContext).appendListIds(homepage); // Stena: Diazoma
         }
         return homepage;
     }

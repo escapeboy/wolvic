@@ -897,7 +897,7 @@ public class VRBrowserActivity extends PlatformActivity implements WidgetManager
             if (extras.containsKey(EXTRA_OPEN_IN_BACKGROUND)) {
                 openInBackground = extras.getBoolean(EXTRA_OPEN_IN_BACKGROUND, false);
                 if (targetUri == null) {
-                    targetUri = Uri.parse(SettingsStore.getInstance(this).getHomepage());
+                    targetUri = Uri.parse(com.igalia.wolvic.stena.StenaLists.get(this).homeWithListIds(SettingsStore.getInstance(this).getHomepage())); // Stena: Diazoma
                 }
             }
 
@@ -905,7 +905,7 @@ public class VRBrowserActivity extends PlatformActivity implements WidgetManager
             if (extras.containsKey(EXTRA_CREATE_NEW_WINDOW)) {
                 openInWindow = extras.getBoolean(EXTRA_CREATE_NEW_WINDOW, false);
                 if (targetUri == null) {
-                    targetUri = Uri.parse(SettingsStore.getInstance(this).getHomepage());
+                    targetUri = Uri.parse(com.igalia.wolvic.stena.StenaLists.get(this).homeWithListIds(SettingsStore.getInstance(this).getHomepage())); // Stena: Diazoma
                 }
             }
 

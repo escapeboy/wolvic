@@ -101,6 +101,27 @@ public final class StenaLists {
         mSettings = StenaSettings.get(context);
     }
 
+    private static final Pattern DIAZOMA_LIST = Pattern.compile("^https://diazoma\\.app/v1/lists/([a-z]+)$");
+
+    /**
+     * The home page address with the ids of the subscribed lists other than core (only lists diazoma.app serves):
+     * `…&lists=adult`, or `…&lists=` when there are none, so the start page forgets a list that was removed. Reads the
+     * settings only, never the network, and takes no lock: it runs on the UI thread while an update may hold one.
+     */
+    public @NonNull String appendListIds(@NonNull String home) {
+        List<String> ids = new ArrayList<>();
+        for (String u : mSettings.getCustomLists()) {
+            java.util.regex.Matcher m = DIAZOMA_LIST.matcher(u);
+            if (acceptableUrl(u) && m.matches() && !"core".equals(m.group(1)) && !ids.contains(m.group(1))) ids.add(m.group(1));
+        }
+        return home + (home.contains("?") ? "&" : "?") + "lists=" + String.join(",", ids);
+    }
+
+    /** {@link #appendListIds} for Diazoma's default home page; any other home page is returned as it is. */
+    public @NonNull String homeWithListIds(@NonNull String home) {
+        return home.equals(mContext.getString(R.string.HOMEPAGE_URL)) ? appendListIds(home) : home;
+    }
+
     private List<String> subscribed() {
         List<String> urls = new ArrayList<>();
         urls.add(CORE_URL);
