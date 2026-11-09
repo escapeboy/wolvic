@@ -85,7 +85,7 @@
     <!-- Settings > Privacy > Privacy policy. Draft: to be checked before a public release. -->
     <string name="stena_privacy_title">Privacy</string>
     <string name="stena_privacy_subtitle_1">What the browser sends</string>
-    <string name="stena_privacy_section_1">Diazoma Browser sends no usage statistics and no crash reports. Finding a wall for a page happens inside the browser, and the page address is not sent anywhere. When a recipe opens its wall on diazoma.app, only the name of the recipe goes there.</string>
+    <string name="stena_privacy_section_1">Diazoma Browser itself sends no usage statistics and no crash reports. If the app crashes, the Meta headset software may report the crash to Meta, which shows us the technical details in its developer dashboard. Finding a wall for a page happens inside the browser, and the page address is not sent anywhere. When a recipe opens its wall on diazoma.app, only the name of the recipe goes there.</string>
     <string name="stena_privacy_subtitle_2">Connections the browser makes</string>
     <string name="stena_privacy_section_2">• diazoma.app, at most once a day, to update the signed recipe lists, and to any signed list you add yourself.
         \n• diazoma.app when you open a wall from a recipe, and the museums and archives the recipe reads.

@@ -493,6 +493,10 @@ public class Session implements WContentBlocking.Delegate, WSession.NavigationDe
         }
 
         Log.d(LOGTAG, "Suspending Session: " + mState.mId);
+        if (!mState.mSession.isOpen()) { // Stena: still waiting for the engine: cancel its queued load
+            cleanSessionListeners(mState.mSession);
+            mState.mSession.close();
+        }
         closeSession(mState);
         mState.mSession = null;
 

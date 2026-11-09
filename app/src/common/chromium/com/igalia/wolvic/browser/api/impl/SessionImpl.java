@@ -160,9 +160,13 @@ public class SessionImpl implements WSession, DownloadManagerBridge.Delegate {
 
     @Override
     public void close() {
-        mRuntime.unregisterCallback(mReadyCallback);
-        mTab.destroy();
-        mTab = null;
+        if (mRuntime != null) { // Stena: a session that never became ready has no tab yet
+            mRuntime.unregisterCallback(mReadyCallback);
+        }
+        if (mTab != null) {
+            mTab.destroy();
+            mTab = null;
+        }
     }
 
     @Override

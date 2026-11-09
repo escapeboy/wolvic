@@ -2488,7 +2488,8 @@ public class WindowWidget extends UIWidget implements SessionChangeListener,
         } catch (URISyntaxException e) {
             return false;
         }
-        if (UrlUtils.isEngineSupportedScheme(uri, mSession.getWSession().getUrlUtilsVisitor())) {
+        WSession wSession = mSession.getWSession(); // Stena: null while the session is suspended
+        if (wSession == null || UrlUtils.isEngineSupportedScheme(uri, wSession.getUrlUtilsVisitor())) {
             return false;
         } else {
             Intent intent;
